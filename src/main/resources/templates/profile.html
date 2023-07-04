@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrapper">
+    <img th:src="@{/images/{filename}(filename=${user.getImg()})}" alt="">
+    <h3 th:text="${user.getName()}">name</h3>
+    <p th:text="${user.getBio()}">BIO</p>
+    <p th:text="${user.getNumOfFriends()}">num of friends</p>
+  </div>
+  <a th:href="@{/post(userID=${post.getId()})}" th:each="post:${user.getPosts()}">
+    <div  class="myPosts">
+      <h3 th:text="${post.getAuthor().getName()}"> Name</h3>
+      <p th:text="'Posted on: ' + ${post.getTimestamp()}">timestamp</p>
+      <p th:text="${post.getHeadline()}"></p>
+      <p th:text="${post.getContent()}">content</p>
+      <p th:text="'comments : ' + ${post.getComments().size()}"></p>
+    </div>
+  </a>
+</body>
+</html>

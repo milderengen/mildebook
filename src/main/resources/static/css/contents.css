@@ -1,0 +1,50 @@
+.wrapper{
+    display: flex;
+}
+.wrapper section{
+    flex: 1;
+}
+.chat{
+    display: flex;
+    align-items: center;
+    border: solid red 2px;
+    margin-bottom: 5px;
+}
+.chats{
+    margin-top: 50px;
+}
+.people{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    border: solid green 2px;
+    margin-bottom: 2px;
+}
+.chat img, .people img{
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.nehehe{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    text-decoration: none;
+}
+.nehehe p{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    text-decoration: none;
+}
+.nehehe h3{
+    margin-bottom: 4px;
+    margin-top: 15px;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+    color: black;
+}

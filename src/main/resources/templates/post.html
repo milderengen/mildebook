@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/hat.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/8e5b37fc01.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+<div class="wrapper">
+    <img th:src="@{/images/{filename}(filename=${user.getImg()})}" alt="">
+    <h2 th:text="${user.getName()}"></h2>
+    <p th:text="${user.getName()}"></p>
+    <h3 th:text="${post.getHeadline()}"></h3>
+    <p th:text="${post.getContent()}"></p>
+    <div class="interaction">
+        <div class="reaction">
+            <a th:href="@{/like(postID=${post.getId()})}" th:text="${post.getLikes()}" class="like"><i class="fas fa-thumbs-up"></i></a>
+        </div>
+        <div class="reaction">
+            <a th:href="@{/dislike(postID=${post.getId()})}" th:text="${post.getDislikes()}" class="dislike"><i class="fas fa-thumbs-down"></i></a>
+        </div>
+    </div>
+    <div class="comment" th:each="comment : ${post.getComments()}">
+        <div  class="bruh">
+            <img th:src="@{/images/{filename}(filename=${comment.getAuthor().getImg()})}" alt="">
+            <h3 th:text="${comment.getAuthor().getName()}"></h3>
+        </div>
+        <p th:text="${comment.getPosted()}"></p>
+        <p th:text="${comment.getContent()}"></p>
+    </div>
+    <form th:action="@{/postComment}" method="post">
+        <input type="hidden" th:value="${user.getId()}" name="userID">
+        <input type="hidden" th:value="${post.getId()}" name="postID">
+        <textarea name="content" id="" placeholder="Type text here"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

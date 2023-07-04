@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/contents.css}">
+    <title>Document</title>
+</head>
+<body>
+<div class="wrapper">
+    <section class="friends">
+        <form action="/findAFriend" method="GET">
+            <textarea name="name" id="finding" placeholder="find a friend"></textarea>
+            <button type="submit">Find</button>
+        </form>
+        <div th:if="${searchedString!=null}" class="people">
+            <p th:text="searched"></p>
+        </div>
+        <div th:if="${searched!=null}" th:each="search : ${searched}" class="people">
+            <img th:src="@{/images/{filename}(filename=${search.getImg()})}"  alt="photo">
+            <div class="nehehe">
+                <h3 th:text="${search.getName()}"></h3>
+                <p th:text="${search.getNumOfFriends()}"></p>
+                <form th:action="@{/friendReq/send}" method="post">
+                    <input type="hidden" name="id" th:value="${search.getId()}">
+                    <button type="submit">Send a friend request</button>
+                </form>
+<!--                <a th:href="@{/friendReq/send(id=${search.getId()})}"></a>-->
+            </div>
+        </div>
+<!--        <a href="">-->
+<!--            <div class="people">-->
+<!--                <img src="Radko.PNG" alt="photo">-->
+<!--                <div class="nehehe">-->
+<!--                    <h3>name</h3>-->
+<!--                    <p>number of friends</p>-->
+<!--                    <a href="">add friend</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </a>-->
+    </section>
+    <section class="feed">
+        <a href="" th:each="post:${friendPosts}">
+            <div class="post">
+                <h3 th:text="${post.getAuthor()}">Miloš Jánošík</h3>
+                <p th:text="${post.getTimestamp()}">28.2.2023 at 19:03PM</p>
+                <h4 th:text="${post.getHeadline()}">Prečo sú myšičky piče</h4>
+                <p th:text="${post.getContent()}"></p>
+                <p th:text="'Likes: ' + ' ' +${post.getLikes()}"></p>
+                <p th:text="'Dislikes: ' + ' ' +${post.getDislikes()}"></p>
+                <p th:text="'Comments: ' + ' ' +${post.getComments().size()}"></p>
+            </div>
+        </a>
+<!--        <a href="">-->
+<!--            <div class="post">-->
+<!--                <h3>Miloš Jánošík</h3>-->
+<!--                <p>28.2.2023 at 19:03PM</p>-->
+<!--                <h4>Prečo sú myšičky piče</h4>-->
+<!--                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam voluptatum sapiente sint optio, labore eius laudantium error perspiciatis quas minus atque eveniet assumenda quia non fugiat. Excepturi obcaecati assumenda ad.-->
+<!--                    Voluptas rerum itaque dolore non deleniti commodi consectetur magnam sint pariatur, expedita temporibus illo rem suscipit corporis facilis aut labore. Aliquid minus nobis quae praesentium vitae minima accusantium. Quos, laborum.-->
+<!--                    Perspiciatis nostrum quia ipsum! Asperiores, provident perferendis culpa voluptatem cupiditate numquam unde ipsam maxime? Impedit veritatis voluptas praesentium accusamus itaque nulla doloremque corrupti sed vitae officia! Illo ea expedita animi.-->
+<!--                    Dolorum eos qui quae amet nostrum molestiae. Ea, ut? Quisquam eos praesentium iure libero minus. Numquam earum possimus nihil totam animi, consequuntur vitae fuga. Quis explicabo distinctio reiciendis quibusdam illo.-->
+<!--                </p>-->
+<!--                <p>Likes: 50</p>-->
+<!--                <p>Disslikes: 0</p>-->
+<!--                <p>comments: 10</p>-->
+<!--            </div>-->
+<!--        </a>-->
+    </section>
+    <section class="Chats" style="margin-top: 45px;">
+        <p th:if="${chats==null}">No chats yet, create one right now</p>
+        <a th:else th:each="chat : ${chats}" th:href="@{/chat(chatID=${chat.getId()})}" >
+            <div th:if="${chat.getChatter1()==me}" class="chat">
+                <img th:src="${chat.getChatter2().getImg()}" alt="Profile pic theoretically" >
+                <div class="nehehe">
+                    <h3 th:text="${chat.getChatter2().getName()}">name of person you are messagin to</h3>
+                    <p>
+                      <span th:with="author=${chat.getLatestMessage(chat.getMessages()).getAuthor()}">
+                        <span th:with="truncatedAuthor=${#strings.length(author) > 10 ? #strings.substring(author, 0, 10) + '...' : author}">
+                          <span th:if="${author == 'me'}" th:text="'you : ' + ${truncatedContent}"></span>
+                          <span th:unless="${author == 'me'}" th:text="${#strings.length(truncatedAuthor) + #strings.length(truncatedContent) > 10 ? #strings.substring(truncatedAuthor, 0, 10 - #strings.length(truncatedContent)) + '...' : truncatedAuthor} + ' : ' + ${truncatedContent}"></span>
+                        </span>
+                      </span>
+                    </p>
+                    <p th:text="${chat.getLatestMessage(chat.getMessages()).getTimestamp()}"></p>
+                </div>
+            </div>
+        </a>
+    </section>
+</div>
+</body>
+</html>

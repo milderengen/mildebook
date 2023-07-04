@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function showContent(contentId) {
+            // Hide all content divs
+            document.getElementById('content1').style.display = 'none';
+            document.getElementById('content2').style.display = 'none';
+
+            // Show the selected content div
+            document.getElementById(contentId).style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <ul>
+        <li onclick="showContent('content1')">Show Content 1</li>
+        <li onclick="showContent('content2')">Show Content 2</li>
+    </ul>
+    <div  id="content1" style="display:none">
+        <div class="requestToMe" th:each="mine : ${toMe}">
+            <img th:src="@{/images/{filename}(filename=${mine.getSender().getImg()})}"  alt="">
+            <h3 th:text="${mine.getSender().getName()}">Name of person</h3>
+            <p th:text="${mine.getSender().getNumOfFriends()}">num of friends</p>
+            <div th:if="${mine.getStatus()==null}">
+                <a th:href="@{/friendReq/accepted(id=${mine.getId()})}">Reject</a>
+                <a th:href="@{/friendReq/rejected(id=${mine.getId()})}">Accept</a>
+            </div>
+            <div th:else="${mine.getStatus()=='accepted' or mine.getStatus()=='rejected'}">
+                <p th:text="${mine.getStatus()}"></p>
+                <a th:href="@{/friendReq/deletion(id=${mine.getId()})}">Delete</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="content2" style="display:none" >
+        <div class="myRequests" th:each="from : ${fromMe}">
+            <img th:src="@{/images/{filename}(filename=${from.getReceiver().getImg()})}" alt="">
+            <h3 th:text="${from.getReceiver().getName()}"></h3>
+            <p th:text="${from.getReceiver().getNumOfFriends()}"></p>
+            <p th:text="${from.getStatus()}"></p>
+            <p th:text="${from.getRequestCreationDate()}"></p>
+            <a th:href="@{/friendReq/deletion(id=${from.getId()})}">Cancel</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

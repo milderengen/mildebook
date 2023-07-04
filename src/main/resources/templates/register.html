@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<form action="#" th:action="@{/registration}" method="post">
+  <label for="name">Name:</label>
+  <textarea id="name" name="name"></textarea>
+  <label for="avatar">Photo:</label>
+  <input type="file"
+         id="avatar" name="avatar"
+         accept="image/png, image/jpeg">
+  <label for="pass">Password</label>
+  <textarea id="pass" name="pass"></textarea>
+  <label for="pass2">Repeat password</label>
+  <textarea id="pass2" name="pass2"></textarea>
+  <button type="submit">Register</button>
+</form>
+<a href="/">Already have an account? Log-in here!</a>
+</body>
+</html>
