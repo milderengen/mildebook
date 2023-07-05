@@ -10,14 +10,13 @@ Functionality:
 - Posting comments under the posts
 - Changing your profile, BIO
 - Liking or disliking posts
-
-
-In future:
+- Private profile option
 - SCD2 implementation for edits on posts,  maybe users as well
 - Not just deleting messages without a trace, but setting them in database to deleted and show "Message has been deleted"
+
+In future:
 - Security
 - Testing
 - Design
 - Sending photos through the chat
-- Private profile option
 - messages, read not read
