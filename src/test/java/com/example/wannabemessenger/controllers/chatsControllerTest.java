@@ -69,7 +69,7 @@ public class chatsControllerTest {
     public void chatShouldReturnBadRequestViewWhenUserIsNotPartOfChat() throws Exception {
         int chatID = 1;
         int userID = 1;
-        chat testChat = generalFunctions.dummyChat(); // initialize with appropriate values
+        chat testChat = generalFunctions.dummyChat();
         MockHttpSession session = new MockHttpSession();
 
         session.setAttribute("userID", userID);
