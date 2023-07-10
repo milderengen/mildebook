@@ -11,11 +11,16 @@
 </head>
 <body>
 <div class="wrapper">
-    <img th:src="@{/images/{filename}(filename=${user.getImg()})}" alt="">
-    <h2 th:text="${user.getName()}"></h2>
-    <p th:text="${user.getName()}"></p>
+    <a href="/contents">Home</a>
+    <img th:src="@{/images/{filename}(filename=${author.getImg()})}" alt="">
+    <h2 th:text="${author.getName()}"></h2>
+    <p th:text="${post.getTimestamp()}"></p>
     <h3 th:text="${post.getHeadline()}"></h3>
     <p th:text="${post.getContent()}"></p>
+    <form th:action="@{/postDelete}" method="post" th:if="${author.getId()==me.getId()}">
+        <input type="hidden" th:value="${post.getId()}">
+        <button type="submit">Delete Post</button>
+    </form>
     <div class="interaction">
         <div class="reaction">
             <a th:href="@{/like(postID=${post.getId()})}" th:text="${post.getLikes()}" class="like"><i class="fas fa-thumbs-up"></i></a>

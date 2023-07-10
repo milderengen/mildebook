@@ -13,12 +13,13 @@
 <!--        <input type="text">-->
 <!--        <button type="submit">Find a Friend in your friendlist</button>-->
 <!--    </form>-->
+    <a href="/contents">Home</a>
     <div class="friend" th:each="friend : ${friends}">
         <img th:src="@{/images/{filename}(filename=${friend.getImg()})}"  alt="myFriend">
         <p th:text="${${friend.getName()}}">Name of said friend</p>
         <p th:text="${${friend.getNumOfFriends()}}">number of friends of said friend</p>
         <a th:if="${generalFunctions.isThereAChat(friend,myChats).isPresent()}" th:href="@{/chat(chatID=${generalFunctions.isThereAChat(friend,myChats).get().getId()})}">Send a message</a>
-        <a th:unless="${generalFunctions.isThereAChat(friend,myChats).isPresent()}" th:href="@{/chat(chatID=${0})}">Send a message</a>
+        <a th:unless="${generalFunctions.isThereAChat(friend,myChats).isPresent()}" th:href="@{/createChat(friendID=${friend.getId()})}">Send a message</a>
         <form action="/endOfFriendship" method="post">
             <input type="hidden" th:value="${friend.getId()}" name="friendID">
             <button type="submit">Unfriend</button>

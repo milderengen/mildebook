@@ -22,7 +22,8 @@ public class user {
     @Column(name = "img")
     private String img;
 
-
+    @Column(name = "private")
+    private boolean privateAcc = false;
 
     @Column(name = "bio")
     private String bio;
@@ -35,8 +36,15 @@ public class user {
     private List<message> messages;
 
     @OneToMany(mappedBy = "person")
-    private List<friendship> friendships;
+    private List<friendship> friendships = new ArrayList<>();
+    @OneToMany(mappedBy = "friend")
+    private List<friendship> friendships2 = new ArrayList<>();
 
+    public List<friendship> getAllFriendships(){
+        List<friendship> combinedList = new ArrayList<>(friendships);
+        combinedList.addAll(friendships2);
+        return combinedList;
+    }
     public String getBio() {
         return bio;
     }
@@ -83,7 +91,13 @@ public class user {
         this.password = password;
     }
 
+    public boolean isPrivateAcc() {
+        return privateAcc;
+    }
 
+    public void setPrivateAcc(boolean privateAcc) {
+        this.privateAcc = privateAcc;
+    }
     public List<post> getPosts() {
         return posts;
     }

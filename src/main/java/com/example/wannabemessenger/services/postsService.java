@@ -24,7 +24,7 @@ public class postsService {
     public List<post>checkIfFriendPost(List<user> friends){
         List<post> posts = findAllPosts();
         return posts.stream()
-                .filter(post -> friends.stream().anyMatch(friend -> friend.getId() == post.getAuthor().getId()))
+                .filter(post -> post.isActive() && !post.isDeleted() && friends.stream().anyMatch(friend -> friend.getId()==(post.getAuthor().getId())))
                 .collect(Collectors.toList());
     }
     public Optional<post> findPostByID(int postID){

@@ -14,12 +14,17 @@ public class message {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name="AuthorID")
+    @JoinColumn(name="Author_id")
     private user author;
-    private String content;
 
+    @Column(name = "content")
+    private String content;
+    @Column(name = "deleted")
+    private boolean deleted = false;
+    @Column(name = "deletion_date")
+    private Timestamp deletionDate;
     @ManyToOne
-    @JoinColumn(name="ChatID")
+    @JoinColumn(name="Chat_id")
     private chat chat;
 
     @Column(name = "timestamp")
@@ -62,5 +67,20 @@ public class message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public Timestamp getDeletionDate() {
+        return deletionDate;
+    }
+
+    public void setDeletionDate(Timestamp deletionDate) {
+        this.deletionDate = deletionDate;
     }
 }

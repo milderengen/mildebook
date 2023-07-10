@@ -45,6 +45,8 @@ public class friendshipsController {
                         (friendship.getPerson().equals(generalFunctions.myUserFromSession(session, usersService)) && friendship.getFriend().equals(friend)) ||
                                 (friendship.getPerson().equals(friend) && friendship.getFriend().equals(generalFunctions.myUserFromSession(session, usersService)))).toList();
         friendshipsService.deleteFriendship(filteredFriendships.get(0));
+        filteredFriendships.get(0).getFriend().setNumOfFriends(filteredFriendships.get(0).getFriend().getNumOfFriends()-1);
+        filteredFriendships.get(0).getPerson().setNumOfFriends(filteredFriendships.get(0).getPerson().getNumOfFriends()-1);
         return"redirect:/friendlist";
     }
 }

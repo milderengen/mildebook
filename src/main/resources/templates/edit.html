@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="/contents">Home</a>
+    <form method="post" action="/postEdit">
+        <input type="hidden" name="postID" th:value="${post.getId()}">
+        <label for="headline">Change headline</label>
+        <textarea id="headline" name="headline" th:text="${post.getHeadline()}"></textarea>
+        <label for="content">Change content</label>
+        <textarea id="content" name="content" th:text="${post.getContent()}"></textarea>
+        <button type="submit">Update post</button>
+    </form>
+</body>
+</html>

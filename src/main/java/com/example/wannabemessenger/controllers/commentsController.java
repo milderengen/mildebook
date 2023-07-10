@@ -35,10 +35,11 @@ public class commentsController {
         comment.setPost(post.get());
         comment.setContent(content);
         comment.setPosted(generalFunctions.getTime());
+        commentService.saveComment(comment);
         return "redirect:post";
     }
     @PostMapping("/deleteComment")
-    public String deleteComment(@RequestParam(name = "commentID") int commentID, RedirectAttributes redirectAttributes){
+    public String deleteComment(@RequestParam(name = "commentID") int commentID, RedirectAttributes redirectAttributes){    // fix deleting only when you are the author
         Optional<comment> comment = commentService.getCommentByID(commentID);
         post post = comment.get().getPost();
         commentService.deleteComment(comment.get());

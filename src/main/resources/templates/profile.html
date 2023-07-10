@@ -6,13 +6,28 @@
   <title>Document</title>
 </head>
 <body>
+  <a href="/contents">Home</a>
   <div class="wrapper">
     <img th:src="@{/images/{filename}(filename=${user.getImg()})}" alt="">
     <h3 th:text="${user.getName()}">name</h3>
     <p th:text="${user.getBio()}">BIO</p>
     <p th:text="${user.getNumOfFriends()}">num of friends</p>
+    <a th:if="${user.getId()==me.getId()}" href="/logout">Log-out</a>
+    <form th:if="${user.getId()==me.getId()}" method="post">
+      <input type="hidden" th:value="${me.getId()}">
+      <label class="option-label">
+        <input type="checkbox" name="privacy" value="private">
+        Private
+      </label>
+      <label class="option-label">
+        <input type="checkbox" name="privacy" value="public">
+        Public
+      </label>
+      <button type="submit">Submit</button>
+    </form>
   </div>
-  <a th:href="@{/post(userID=${post.getId()})}" th:each="post:${user.getPosts()}">
+  <h1>Posts: </h1>
+  <a th:unless="${user.isPrivateAcc() || areFriends}" th:href="@{/post(userID=${post.getId()})}" th:each="post:${user.getPosts()}">
     <div  class="myPosts">
       <h3 th:text="${post.getAuthor().getName()}"> Name</h3>
       <p th:text="'Posted on: ' + ${post.getTimestamp()}">timestamp</p>
@@ -21,5 +36,13 @@
       <p th:text="'comments : ' + ${post.getComments().size()}"></p>
     </div>
   </a>
+  <div>
+    <h2 th:if="${user.isPrivateAcc()}">This profile is private, send friend request to befriend the mf</h2>
+    <form th:action="@{/friendReq/send}" method="post">
+      <input type="hidden" name="id" th:value="${user.getId()}">
+      <button type="submit">Send a friend request</button>
+    </form>
+  </div>
+
 </body>
 </html>

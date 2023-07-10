@@ -1,0 +1,8 @@
+e1 = User already exists
+e2 = passwords are not the same
+e3 = badLogin - username and passwords don't match
+e4 = userNotFound
+e5 = wrong input, username is not present or too short
+e6 = password is not long enough
+e7 = image is not selected
+e8 = password was not set

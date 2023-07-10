@@ -13,11 +13,11 @@ public class comment {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "postID")
+    @JoinColumn(name = "original_post_id")
     private post post;
 
     @ManyToOne
-    @JoinColumn(name = "authorID")
+    @JoinColumn(name = "author_id")
     private user author;
     @Column(name="timestamp")
     private Timestamp posted;
@@ -26,6 +26,26 @@ public class comment {
 
     @Column(name="edited")
     private boolean edited = false;
+    @Column(name = "edit_date")
+    private Timestamp editDate;
+    @Column(name = "original_commnent_id")
+    private int originalCommentId;
+
+    public Timestamp getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(Timestamp editDate) {
+        this.editDate = editDate;
+    }
+
+    public int getOriginalCommentId() {
+        return originalCommentId;
+    }
+
+    public void setOriginalCommentId(int originalCommentId) {
+        this.originalCommentId = originalCommentId;
+    }
 
     public boolean isEdited() {
         return edited;

@@ -55,6 +55,8 @@ public class friendRequestController {
         friendshipsService.saveFriendship(friendship);
         friendRequest.setStatus("Accepted");
         friendRequestsService.saveRequest(friendRequest);
+        friendRequest.getSender().setNumOfFriends(friendRequest.getSender().getNumOfFriends()+1);
+        friendRequest.getReceiver().setNumOfFriends(friendRequest.getReceiver().getNumOfFriends()+1);
         return "index"; //napraviť
     }
     @GetMapping("friendReq/rejected")
@@ -70,6 +72,7 @@ public class friendRequestController {
         friendRequestsService.deleteRequest(requestID);
         return "index"; //napraviť do piče
     }
+
     @GetMapping("friendReq")
     public String friendRequest(Model model, HttpSession session){
         user myUser = generalFunctions.myUserFromSession(session, usersService);
