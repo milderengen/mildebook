@@ -1,4 +1,5 @@
 # mildebook
+Ever wondered what would Facebook look like if Mark didn't hire a frontend devs? Presenting mildebook
 My own social network inspired by facebook
 
 Not complete, i am puting it here so i dont loose everything in case of hardware failiure on my side.
@@ -13,10 +14,12 @@ Functionality:
 - Private profile option
 - SCD2 implementation for edits on posts,  maybe users as well
 - Not just deleting messages without a trace, but setting them in database to deleted and show "Message has been deleted"
+- Testing using JUnit and mockito
+- Controlling files sent to the system(creating new names, checking file type, file size)
 
 In future:
-- Security
-- Testing
+- Improve security (Anti SQL injection, input sanitation)
+- Progress in testing
 - Design
 - Sending photos through the chat
 - messages, read not read
