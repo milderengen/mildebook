@@ -57,9 +57,8 @@ public class commentsControllerTest {
 
     @Test
     public void deleteCommentShouldRedirectToPostView() throws Exception {
-        int commentID = generalFunctions.randNum();
         comment mockComment = generalFunctions.dummyComment();
-        post mockPost = mockComment.getPost();
+        int commentID = mockComment.getId();
 
         when(commentService.getCommentByID(eq(commentID))).thenReturn(Optional.of(mockComment));
 
@@ -71,10 +70,10 @@ public class commentsControllerTest {
 
     @Test
     public void updateCommentShouldRedirectToPostView() throws Exception {
-        int commentID = generalFunctions.randNum();
         String editedContent = "Edited Content";
         comment mockComment = generalFunctions.dummyComment();
-        post mockPost = mockComment.getPost();
+        int commentID = generalFunctions.randNum();
+
 
         when(commentService.getCommentByID(eq(commentID))).thenReturn(Optional.of(mockComment));
 
