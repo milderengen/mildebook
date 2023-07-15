@@ -15,13 +15,19 @@
     </section>
     <div class="chat-container">
         <div class="chat">
-            <div th:each="message : ${messages}" th:if="${message.getAuthor() == me}" class="message right"><img th:src="@{/images/{filename}(filename=${me.getImg()})}" alt=""></div>
-            <div th:each="message : ${messages}" th:if="${message.getAuthor() != me}" class="message left"><img th:src="@{/images/{filename}(filename=${message.getAuthor().getImg()})}" alt=""></div>
+            <div th:each="message : ${messages}" th:if="${message.getAuthor() == me && message.getContent()!=null}" class="message right"><img th:src="@{/images/{filename}(filename=${me.getImg()})}" alt=""><p th:text="${message.getContent()}"></p></div>
+            <div th:each="message : ${messages}" th:if="${message.getAuthor() == me && message.getContent()==null}" class="message right"><img th:src="@{/images/{filename}(filename=${me.getImg()})}" alt=""><img th:src="@{/images/{filename}(filename=${message.getImage()})}"></div>
+            <div th:each="message : ${messages}" th:if="${message.getAuthor() != me && message.getContent()!=null}" class="message left"><img th:src="@{/images/{filename}(filename=${message.getAuthor().getImg()})}" alt=""><p th:text="${message.getContent()}"></p></div>
+            <div th:each="message : ${messages}" th:if="${message.getAuthor() != me && message.getContent()==null}" class="message left"><img th:src="@{/images/{filename}(filename=${message.getAuthor().getImg()})}" alt=""><img th:src="@{/images/{filename}(filename=${message.getImage()})}"></div>
         </div>
     </div>
     <form action="" method="post">
         <textarea name="" id="" placeholder="your message"></textarea>
         <button type="submit">Send</button>
+    </form>
+    <form action="" method="post">
+        <input type="file">
+        <button type="submit"></button>
     </form>
 </div>
 </body>
