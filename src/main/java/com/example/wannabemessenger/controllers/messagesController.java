@@ -28,7 +28,10 @@ public class messagesController {
     public String sendMessage(@RequestParam(name = "chatID") int chatID,
                               @RequestParam(name = "userID") int userID,
                               @RequestParam(name = "content") String content, RedirectAttributes redirectAttributes, HttpSession session){
-
+        if(content.isEmpty()){
+            redirectAttributes.addAttribute("chatID", chatID);
+            return "redirect:chat";
+        }
         if(userID==generalFunctions.myUserFromSession(session, usersService).getId()){
             Optional<chat> optionalChat = chatsService.getChatByID(chatID);
             chat chat = optionalChat.get();
@@ -62,7 +65,7 @@ public class messagesController {
             message message = new message();
             message.setAuthor(user);
             message.setChat(chat);
-            message.setContent(safeFileName);
+            message.setImage(safeFileName);
             message.setTimestamp(generalFunctions.getTime());
         }
         redirectAttributes.addAttribute("chatID", chatID);
