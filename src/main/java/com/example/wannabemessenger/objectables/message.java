@@ -19,6 +19,11 @@ public class message {
 
     @Column(name = "content")
     private String content;
+    @Column(name = "image")
+    private String image;
+
+
+
     @Column(name = "deleted")
     private boolean deleted = false;
     @Column(name = "deletion_date")
@@ -79,7 +84,13 @@ public class message {
     public Timestamp getDeletionDate() {
         return deletionDate;
     }
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
     public void setDeletionDate(Timestamp deletionDate) {
         this.deletionDate = deletionDate;
     }
